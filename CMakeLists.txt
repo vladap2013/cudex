@@ -51,6 +51,7 @@ endif()
 add_executable(cudex_tests
 	tests/test_memory.cpp.cu
 	tests/test_launcher.cpp.cu
+	tests/test_uarray.cpp.cu
 )
 target_link_libraries(cudex_tests cudex_lib gtest_main)
 
