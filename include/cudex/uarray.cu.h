@@ -30,7 +30,7 @@ public:
 
     constexpr __host__ __device__ const T* begin() const
     {
-        return reinterpret_cast<T*>(data_);
+        return reinterpret_cast<const T*>(data_);
     }
 
     constexpr __host__ __device__ T* end()
