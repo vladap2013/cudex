@@ -13,7 +13,16 @@ set(CUDA_STANDARD_REQUIRED ON)
 # ----- glog
 
 if (NOT TARGET glog::glog)
-	find_package(glog REQUIRED)
+	message("Downloading google log")
+	include(FetchContent)
+
+	FetchContent_Declare(
+	  glog
+	  URL https://github.com/google/glog/archive/v0.4.0.tar.gz
+	  URL_HASH SHA256=f28359aeba12f30d73d9e4711ef356dc842886968112162bc73002645139c39c
+	)
+
+	FetchContent_MakeAvailable(glog)
 endif()
 
 
@@ -41,8 +50,8 @@ if (NOT TARGET gtest_main)
 
 	FetchContent_Declare(
 	  googletest
-	  GIT_REPOSITORY https://github.com/google/googletest.git
-	  GIT_TAG master
+	  URL https://github.com/google/googletest/archive/release-1.10.0.tar.gz
+	  URL_HASH SHA256=9dc9157a9a1551ec7a7e43daea9a694a0bb5fb8bec81235d8a1e6ef64c716dcb
 	)
 
 	FetchContent_MakeAvailable(googletest)
