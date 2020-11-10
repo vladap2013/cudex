@@ -222,7 +222,7 @@ size_t DeviceMemory<T>::capacity() const
 }
 
 template<typename T>
-void DeviceMemory<T>::resize(size_t newSize)
+DeviceSpan<T> DeviceMemory<T>::resize(size_t newSize)
 {
     if (newSize > capacity()) {
         free();
@@ -230,6 +230,7 @@ void DeviceMemory<T>::resize(size_t newSize)
     }
 
     size_ = newSize;
+    return span();
 }
 
 template<typename T>
@@ -407,6 +408,12 @@ void HostDeviceMemory<T>::resizeSync(const std::vector<T>& data)
 
 template<typename T>
 T& HostDeviceMemory<T>::operator[](size_t index)
+{
+    return host()[index];
+}
+
+template<typename T>
+T& HostDeviceMemory<T>::at(size_t index)
 {
     return host()[index];
 }

@@ -32,7 +32,7 @@ public:
     size_t size() const;
     size_t capacity() const;
 
-    void resize(size_t size);
+    DeviceSpan<T> resize(size_t size);
 
     DeviceSpan<T> span();
     DeviceSpan<const T> span() const;
@@ -48,8 +48,6 @@ public:
 
     DeviceSpan<T> resizeCopy(HostSpan<const T> span);
     DeviceSpan<T> resizeCopy(DeviceSpan<const T> span);
-
-    T& operator[](size_t index);
 
 private:
     void alloc(size_t size);
@@ -97,6 +95,7 @@ public:
     HostSpan<const T> chost() const;
 
     T& operator[](size_t index);
+    T& at(size_t index);
 
     void resizeSync(const std::vector<T>& data);
 
