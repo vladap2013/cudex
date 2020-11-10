@@ -11,32 +11,34 @@ class alignas(T) UArray
 public:
     static constexpr size_t SIZE_IN_BYTES = SIZE * sizeof(T);
 
-    __host__ __device__ T& operator[](size_t index)
+    constexpr __host__ __device__ T& operator[](size_t index)
     {
+        assert(index < SIZE);
         return *(begin() + index);
     }
 
-    __host__ __device__ const T& operator[](size_t index) const
+    constexpr __host__ __device__ const T& operator[](size_t index) const
     {
+        assert(index < SIZE);
         return *(begin() + index);
     }
 
-    __host__ __device__ T* begin()
+    constexpr __host__ __device__ T* begin()
     {
         return reinterpret_cast<T*>(data_);
     }
 
-    __host__ __device__ const T* begin() const
+    constexpr __host__ __device__ const T* begin() const
     {
-        return reinterpret_cast<T*>(data_);
+        return reinterpret_cast<const T*>(data_);
     }
 
-    __host__ __device__ T* end()
+    constexpr __host__ __device__ T* end()
     {
         return begin() + SIZE;
     }
 
-    __host__ __device__ const T* end() const
+    constexpr __host__ __device__ const T* end() const
     {
         return begin() + SIZE;
     }
