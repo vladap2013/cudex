@@ -40,6 +40,20 @@ TEST(launcher, run_1d)
     mem.copyHostToDeviceAsync();
 
     auto launcher = Launcher().async().size1D(SIZE);
+
+    EXPECT_LT(SIZE, launcher.threadCount());
+    EXPECT_EQ(launcher.getSizeBlock().x, Launcher::N_BLOCK_THREADS);
+    EXPECT_EQ(launcher.getSizeBlock().y, 1);
+    EXPECT_EQ(launcher.getSizeBlock().z, 1);
+
+    static_assert(SIZE % Launcher::N_BLOCK_THREADS != 0);
+    constexpr size_t nBlocks = SIZE / Launcher::N_BLOCK_THREADS + 1;
+
+    EXPECT_EQ(nBlocks, launcher.blockCount());
+    EXPECT_EQ(launcher.getSizeGrid().x, nBlocks);
+    EXPECT_EQ(launcher.getSizeGrid().y, 1);
+    EXPECT_EQ(launcher.getSizeGrid().z, 1);
+
     launcher.run(setData, mem.device());
 
     mem.copyDeviceToHost();

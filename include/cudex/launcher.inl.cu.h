@@ -74,5 +74,24 @@ inline Launcher::Launcher(size_t linearSize)
     size1D(linearSize);
 }
 
+inline const dim3& Launcher::getSizeGrid() const
+{
+    return grid_;
+}
+
+inline const dim3& Launcher::getSizeBlock() const
+{
+    return block_;
+}
+
+inline size_t Launcher::blockCount() const
+{
+    return grid_.x * grid_.y * grid_.z;
+}
+
+inline size_t Launcher::threadCount() const
+{
+    return block_.x * block_.y * block_.z * blockCount();
+}
 
 }

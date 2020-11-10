@@ -32,6 +32,9 @@ public:
     const dim3& getSizeGrid() const;
     const dim3& getSizeBlock() const;
 
+    size_t blockCount() const;
+    size_t threadCount() const;
+
 private:
     dim3 grid_;
     dim3 block_ = {N_BLOCK_THREADS, 1, 1};
