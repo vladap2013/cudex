@@ -43,6 +43,13 @@ public:
         return begin() + SIZE;
     }
 
+    constexpr __host__ __device__ void fill(const T& value)
+    {
+        for (T& v: *this) {
+            v = value;
+        }
+    }
+
 private:
     char data_[SIZE_IN_BYTES];
 };
