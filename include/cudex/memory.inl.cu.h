@@ -45,7 +45,7 @@ void copyDeviceToHost(HostSpan<T, Extent1> dst, DeviceSpan<const T, Extent2> src
     }
 
     cudaSafeCall(
-        cudaMemcpy(dst.data(), src.data(), src.size_bytes(), cudaMemcpyHostToDevice)
+        cudaMemcpy(dst.data(), src.data(), src.size_bytes(), cudaMemcpyDeviceToHost)
     );
 }
 
