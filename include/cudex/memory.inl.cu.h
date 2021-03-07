@@ -234,6 +234,12 @@ DeviceSpan<T> DeviceMemory<T>::resize(size_t newSize)
 }
 
 template<typename T>
+DeviceSpan<T> DeviceMemory<T>::resizeCopy(const std::vector<T>& data)
+{
+    return resizeCopy(makeSpan(data));
+}
+
+template<typename T>
 DeviceSpan<T> DeviceMemory<T>::resizeCopy(HostSpan<const T> span)
 {
     resize(span.size());

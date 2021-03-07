@@ -46,6 +46,7 @@ public:
     void copyFromDevice(DeviceSpan<const T> span);
     void copyFromDeviceAsync(DeviceSpan<const T> span);
 
+    DeviceSpan<T> resizeCopy(const std::vector<T>& data);
     DeviceSpan<T> resizeCopy(HostSpan<const T> span);
     DeviceSpan<T> resizeCopy(DeviceSpan<const T> span);
 
